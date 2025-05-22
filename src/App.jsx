@@ -8,7 +8,7 @@ function App() {
   const [file, setFile] = useState(null)
   const [documents, setDocuments] = useState([])
 
-  const API = "http://127.0.0.1:8000"
+  const API = import.meta.env.VITE_API_BASE_URL
 
   const uploadTranscript = async () => {
     if (!file) return alert("Choose a file")
