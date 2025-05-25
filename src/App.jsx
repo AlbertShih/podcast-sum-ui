@@ -34,6 +34,19 @@ function App() {
     setLoading(false)
   }
 
+  const transcribeYouTubeWhisper = async () => {
+    if (!url) return alert("Enter YouTube URL")
+    setLoading(true)
+    const res = await fetch(`${API}/transcribe-youtube-whisper`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    })
+    const data = await res.json()
+    alert(data.message || data.error)
+    setLoading(false)
+  }
+
   const ask = async () => {
     if (!question) return alert("Enter question")
     setLoading(true)
@@ -69,9 +82,26 @@ function App() {
       {/* YouTube input */}
       <div className="space-y-2">
         <h4 className="font-medium">Or Paste YouTube URL</h4>
+        <div className="text-sm text-gray-600 mb-2">
+          <p>Choose how to process the YouTube video:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li className="text-green-600">
+              <strong>With Subtitles:</strong> Uses existing subtitles (manual or auto-generated) from the video
+            </li>
+            <li className="text-blue-600">
+              <strong>With Whisper:</strong> Downloads audio and transcribes it using OpenAI's Whisper model
+            </li>
+          </ul>
+          <p className="mt-2 text-gray-500">
+            Note: Whisper transcription may take longer but works even if the video has no subtitles
+          </p>
+        </div>
         <input className="w-full border rounded px-3 py-2" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://youtube.com/watch?v=..." />
         <button onClick={uploadYouTube} disabled={loading} className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-          Submit YouTube
+          Submit YouTube (with subtitles)
+        </button>
+        <button onClick={transcribeYouTubeWhisper} disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Transcribe with Whisper
         </button>
       </div>
 
