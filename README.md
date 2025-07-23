@@ -1,6 +1,7 @@
 
 # 🎙️ Podcast Summarization UI (RAG)
 
+This is a project that was originally implemented by Vibe Coding.
 This is the **frontend** for the Podcast Summarization project using **LLM + RAG (Retrieval-Augmented Generation)**. It lets users:
 
 - Upload a transcript (`.txt`)
