@@ -1,4 +1,3 @@
-
 # 🎙️ Podcast Summarization UI (RAG)
 
 This is a project that was originally implemented by Vibe Coding.
